@@ -20,8 +20,8 @@ while read -r sel; do
         ;;
     2)
         # Print the time (in only seconds) since last boot
-        # Using awk here to split the input string on spaces and select only first element
-        echo "Time since last boot: $(awk -F'\ ' '{if ($1) print $1}' /proc/uptime)"
+        # Using awk here to select only first element
+        echo "Time since last boot: $(awk '{ print $1 }' /proc/uptime)"
         ;;
     3)
         # Print nr of processes and threads
@@ -31,7 +31,7 @@ while read -r sel; do
     4)
         # Print nr of context switches across CPU
         # Context switching info exsists in /proc/stat and the "ctxt" field hold all context switches across the cpu
-        # Using grep to get the line, and then using awk to select second column (splitting on spaces)
+        # Using grep to get the line, and then using awk to select second column
         FIRST_CONT_SWITCH=$(grep ctxt /proc/stat | awk '{ print $2 }')
 
         # Then sleep for 1 sec
