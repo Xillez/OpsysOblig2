@@ -57,8 +57,8 @@ while read -r sel; do
 
         # Divide time in kernel and user on total time in both, and get "bc" to calculate (for floats)
         # Then print the results
-        echo "Usermode percentage: $(echo "scale=2; $DIFF_USER / (($DIFF_USER + $DIFF_KERNEL)) * 100" | bc)%"
-        echo "Kernelmode percentage: $(echo "scale=2; $DIFF_KERNEL / (($DIFF_USER + $DIFF_KERNEL)) * 100" | bc)%"
+        echo "Usermode percentage: $(echo "scale=2; $DIFF_USER / ($DIFF_USER + $DIFF_KERNEL) * 100" | bc)%"
+        echo "Kernelmode percentage: $(echo "scale=2; $DIFF_KERNEL / ($DIFF_USER + $DIFF_KERNEL) * 100" | bc)%"
         ;;
     6)
         # Print nr of interrupts across CPU
