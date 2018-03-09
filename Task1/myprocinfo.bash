@@ -16,7 +16,7 @@ while read -r sel; do
         echo "I am: $(whoami)"
 
         # Print script file name
-        echo "Script name: $(basename $0)"
+        echo "Script name: $(basename "$0")"
         ;;
     2)
         # Print the time (in only seconds) since last boot
@@ -38,7 +38,7 @@ while read -r sel; do
         sleep 1
 
         # Fetch results again
-        RESULT=$(($(grep ctxt /proc/stat | awk '{ print $2 }') - $FIRST_CONT_SWITCH))
+        RESULT=$(($(grep ctxt /proc/stat | awk '{ print $2 }') - FIRST_CONT_SWITCH))
 
         # Print result
         echo "Nr context switches across cpu: $RESULT"
@@ -52,8 +52,8 @@ while read -r sel; do
         sleep 1
 
         # Fetch results again using grep and awk
-        DIFF_USER=$(( $(grep cpu -m 1 /proc/stat | awk '{ print $2 }') - $FIRST_USER ))
-        DIFF_KERNEL=$(( $(grep cpu -m 1 /proc/stat | awk '{ print $4 }') - $FIRST_KERNEL ))
+        DIFF_USER=$(( $(grep cpu -m 1 /proc/stat | awk '{ print $2 }') - FIRST_USER ))
+        DIFF_KERNEL=$(( $(grep cpu -m 1 /proc/stat | awk '{ print $4 }') - FIRST_KERNEL ))
 
         # Divide time in kernel and user on total time in both, and get "bc" to calculate (for floats)
         # Then print the results
@@ -70,7 +70,7 @@ while read -r sel; do
         sleep 1
 
         # Fetch results again
-        RESULT=$(($(grep intr /proc/stat | awk '{ print $2 }') - $FIRST_INTR))
+        RESULT=$(($(grep intr /proc/stat | awk '{ print $2 }') - FIRST_INTR))
 
         # Print result
         echo "Nr context switches across cpu: $RESULT"
